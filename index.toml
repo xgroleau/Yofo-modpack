@@ -1,0 +1,11 @@
+hash-format = "sha256"
+
+[[files]]
+file = "mods/geckolib.pw.toml"
+hash = "d5d726aacfb80dbe7cc8da290ea3d9557d4fcb5dfa2078d69ac276cdeff485b2"
+metafile = true
+
+[[files]]
+file = "mods/vics-point-blank.pw.toml"
+hash = "78742c5d72567777f1de3ccf133325f6aacb1bed83ee5bc625211b7da1fae8cc"
+metafile = true
