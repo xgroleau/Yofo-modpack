@@ -1,6 +1,27 @@
 hash-format = "sha256"
 
 [[files]]
+file = ".direnv/bin/nix-direnv-reload"
+hash = "266396116ae024c2c3230a6d8f448abb13e09b15f6a2c874c186017a32e3e1f1"
+
+[[files]]
+file = ".envrc"
+hash = "1d26c74fd25a4c3dbb09e029fc609588da499fd4af2a41c88f6316c7f8c54cf1"
+
+[[files]]
+file = "flake.lock"
+hash = "90dad9fea800da70e617f551e33681e9e8947de0ced69f3054a05cd922cf6679"
+
+[[files]]
+file = "flake.nix"
+hash = "1b79766ec93f96869fc3ec09ee2cd8a26467fe17681fff1bc8b7713f0a7f2ea6"
+
+[[files]]
+file = "mods/fabric-api.pw.toml"
+hash = "a8800671ba62afc0a0a2bcbf4330ba7a5906f5fba7ec88b6d5afac2572ecd617"
+metafile = true
+
+[[files]]
 file = "mods/geckolib.pw.toml"
 hash = "d5d726aacfb80dbe7cc8da290ea3d9557d4fcb5dfa2078d69ac276cdeff485b2"
 metafile = true
