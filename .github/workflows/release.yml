@@ -1,0 +1,55 @@
+name: release
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Install nix
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@main
+
+      #See https://github.com/actions/checkout/issues/1467
+      - name: Fetch all tags
+        run: git fetch --depth=1 --tags
+
+      - name: Get the tag
+        id: tag
+        run: |
+          echo version=${v} >> $GITHUB_ENV # Remove all before the first "v" character
+
+      - name: Get current version
+        uses: SebRollen/toml-action@v1.2.0
+        id: read_toml
+        with:
+          file: "pack.toml"
+          field: "version"
+
+      - name: Verify package version
+        if: ${{ env.version != steps.read_toml.outputs.value }}
+        shell: nix develop --command bash -eo pipefail {0}
+        run: |
+          exit 1
+
+      - name: Create DFU and ELF
+        run: |
+          nix run .#pack
+
+      - name: Create a GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            ./Yofo.mrpack
