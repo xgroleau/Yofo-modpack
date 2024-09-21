@@ -28,7 +28,7 @@ jobs:
       - name: Get the tag
         id: tag
         run: |
-          echo version=${v} >> $GITHUB_ENV # Remove all before the first "v" character
+          echo version=${GITHUB_REF_NAME#v} >> $GITHUB_ENV # Remove all before the first "v" character
 
       - name: Get current version
         uses: SebRollen/toml-action@v1.2.0
@@ -40,7 +40,7 @@ jobs:
       - name: Verify package version
         if: ${{ env.version != steps.read_toml.outputs.value }}
         run: |
-          echo "${{ env.version }} != $ {{ steps.read_toml.outputs.value }}"
+          echo "${{ env.version }} != ${{ steps.read_toml.outputs.value }}"
           exit 1
 
       - name: Create modpack
