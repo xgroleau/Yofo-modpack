@@ -21,6 +21,23 @@
       with pkgs;
       {
         devShells.default = mkShell { buildInputs = [ packwiz ]; };
+
+        apps = {
+          pack =
+            let
+              app = pkgs.writeShellApplication {
+                name = "pack";
+                runtimeInputs = with pkgs; [ packwiz ];
+                text = ''
+                  packwiz modrinth export -o Yofo.mrpack
+                '';
+              };
+            in
+            {
+              type = "app";
+              program = "${app}/bin/${app.name}";
+            };
+        };
       }
     );
 }
