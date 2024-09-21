@@ -39,11 +39,11 @@ jobs:
 
       - name: Verify package version
         if: ${{ env.version != steps.read_toml.outputs.value }}
-        shell: nix develop --command bash -eo pipefail {0}
         run: |
+          echo "${{ env.version }} != $ {{ steps.read_toml.outputs.value }}"
           exit 1
 
-      - name: Create DFU and ELF
+      - name: Create modpack
         run: |
           nix run .#pack
 
